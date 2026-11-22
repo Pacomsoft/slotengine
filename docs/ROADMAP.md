@@ -27,15 +27,23 @@ Las etiquetas de versión pueden cambiar después de definir un esquema formal d
 ## Sprint 0 — Preparar entorno y repositorio
 **Meta:** tener un recorrido desde código local hasta integración continua.
 
-- [ ] SLOT-001 Verificar Git, Node.js, .NET SDK, Docker y editor.
-- [ ] SLOT-002 Crear repositorio GitHub y archivos base.
-- [ ] SLOT-003 Inicializar frontend Next.js + TypeScript.
+- [X] SLOT-001 Verificar Git, Node.js, .NET SDK, Docker y editor.
+- [X] SLOT-002 Crear repositorio GitHub y archivos base.
+- [X] SLOT-003 Inicializar frontend Next.js + TypeScript.
 - [ ] SLOT-004 Inicializar ASP.NET Core Web API y OpenAPI.
 - [ ] SLOT-005 Configurar PostgreSQL local con Docker Compose.
 - [ ] SLOT-006 Configurar variables por ambiente y `.gitignore`.
 - [ ] SLOT-007 Agregar health check del backend y consumirlo desde web.
 - [ ] SLOT-008 Configurar CI: build, lint y tests iniciales.
 - [ ] SLOT-009 Documentar cómo ejecutar el proyecto desde cero.
+- [x] SLOT-010 Configurar shadcn/ui y validar primer componente.
+- [x] SLOT-011 Configurar CI del frontend con GitHub Actions.
+- [ ] SLOT-012 Establecer documentación de continuidad del proyecto.
+
+**Notas de avance:**
+- SLOT-006 tiene trabajo inicial realizado mediante `.gitignore`, pero aún falta revisar configuración por ambiente.
+- SLOT-008 está parcialmente cubierto por SLOT-011. Faltan CI de backend y pruebas iniciales.
+- SLOT-012 se marcará completo después de integrar su Pull Request.
 
 **Definición de terminado:** un nuevo desarrollador puede seguir README para ejecutar web, API y DB; al hacer PR, el pipeline valida build y pruebas.
 
