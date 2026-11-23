@@ -4,7 +4,7 @@
 > Última actualización: 2026-11-22
 > Estado: Sprint 0 en progreso
 > Fuente de verdad: repositorio GitHub `Pacomsoft/slotengine`
-> Este documento describe el estado tras integrar PR #3. Actualizarlo después de cada incremento importante.
+> Este documento describe el estado confirmado tras integrar PR #5.
 
 ## 1. Resumen ejecutivo
 
@@ -17,21 +17,19 @@ Stack acordado:
 - Infraestructura local: Docker Compose.
 - CI/CD: GitHub Actions.
 
-Se completó la configuración inicial del frontend y su pipeline de CI.
-
-Todavía no existe una API de SlotEngine implementada en el repositorio, ni una base de datos PostgreSQL configurada para el proyecto.
+Se completaron el frontend con su pipeline de CI y la API inicial en ASP.NET Core .NET 10, con OpenAPI. Aún no existe una base de datos PostgreSQL configurada para el proyecto.
 
 ## 2. Estado confirmado de Git
 
 Repositorio: https://github.com/Pacomsoft/slotengine
 
 Último commit confirmado de main al cierre de sesión:
-`831d78b` — ci(web): add frontend validation workflow (#3)
+`8caae70` — feat(api): initialize ASP.NET Core Web API (#5)
 
 Estado local reportado al cierre:
 - Rama: `main`.
-- Sincronizada con `origin/main`.
-- Working tree limpio.
+- Sincronizada con `origin/main` mediante `git pull --ff-only`.
+- No se presentó una nueva salida de `git status` después de la sincronización.
 
 Verificar nuevamente al iniciar otra sesión: estos datos representan una fotografía del 2026-11-22.
 
@@ -44,19 +42,22 @@ Verificar nuevamente al iniciar otra sesión: estos datos representan una fotogr
 | SLOT-003 | Frontend Next.js inicializado | PR #1, merge `05ef53f` |
 | SLOT-010 | shadcn/ui, Button y pantalla de prueba | PR #2, merge `5c5b94d` |
 | SLOT-011 | CI del frontend con GitHub Actions | PR #3, merge `831d78b` |
+| SLOT-012 | Documentación de continuidad | PR #4, merge `8034236` |
+| SLOT-004 | ASP.NET Core Web API .NET 10 y OpenAPI | PR #5, merge `8caae70` |
 
 Validaciones conocidas:
 - Frontend: `npm run lint` exitoso.
 - Frontend: `npm run build` exitoso.
 - Componente Button visualizado localmente.
 - GitHub Actions: workflow Frontend CI ejecutado exitosamente en PR #3.
+- Backend: restore y build locales exitosos, auditoría NuGet sin vulnerabilidades detectadas.
+- Backend: `GET /api/v1` y OpenAPI `/openapi/v1.json` verificados localmente.
 
 Ejecución CI:
 https://github.com/Pacomsoft/slotengine/actions/runs/45078662471
 
 ## 4. Pendientes del Sprint 0
 
-- SLOT-004: inicializar ASP.NET Core Web API y OpenAPI.
 - SLOT-005: configurar PostgreSQL con Docker Compose.
 - SLOT-006: completar y revisar configuración por ambiente.
 - SLOT-007: health check del backend y consumo desde web.
@@ -67,16 +68,17 @@ El frontend cuenta con CI, pero esto no significa que SLOT-008 esté totalmente 
 
 ## 5. Próximo incremento
 
-**SLOT-004 — ASP.NET Core Web API.**
+**SLOT-005 — PostgreSQL local con Docker Compose.**
 
 Objetivo:
-- Crear la estructura inicial del backend dentro del monorepo.
-- Entender la solución y los proyectos .NET.
-- Configurar una API HTTP mínima.
-- Habilitar documentación OpenAPI.
-- Verificar que la API compile y responda localmente.
+- Definir una configuración local de PostgreSQL en Docker Compose.
+- Evitar credenciales reales en Git.
+- Verificar arranque, conexión y persistencia local.
 
-No implementar autenticación, persistencia ni lógica multi-tenant en este incremento.
+Pendientes técnicos heredados de SLOT-004:
+- Reparar la incompatibilidad de manifiestos workloads de .NET 10. El build local se validó con `MSBuildEnableWorkloadResolver=false` establecido temporalmente.
+- Resolver la configuración de redirección HTTPS para ambientes posteriores.
+- El CI de backend se agregará en SLOT-008.
 
 ## 6. Decisiones y convenciones vigentes
 
