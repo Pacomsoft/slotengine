@@ -1,0 +1,5 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/SlotEngine.Api/SlotEngine.Api.csproj" />
+  </Folder>
+</Solution>
