@@ -74,6 +74,35 @@ SLOT-004 — Inicializar ASP.NET Core Web API con OpenAPI.
 
 ---
 
+## 2026-11-22 — SLOT-004: Primera API ASP.NET Core
+
+### Cambios integrados
+- Se creó `SlotEngine.slnx` y `src/SlotEngine.Api` con .NET 10 (SDK local 10.0.300).
+- Se sustituyó el ejemplo meteorológico por `GET /api/v1`, que devuelve información básica de la API.
+- OpenAPI habilitado en Development mediante `AddOpenApi` y `MapOpenApi`.
+- Se actualizó `Microsoft.AspNetCore.OpenApi` a `10.0.15` tras advertencia NU1903 de una dependencia vulnerable.
+- PR #5 integrado: https://github.com/Pacomsoft/slotengine/pull/5
+- Commit en `main`: `8caae70` (squash merge).
+- PR #4 de continuidad también integrado: `8034236`.
+
+### Evidencia y validaciones
+- `dotnet restore SlotEngine.slnx` y `dotnet build SlotEngine.slnx` exitosos sin warnings tras actualización.
+- Auditoría NuGet sin vulnerabilidades conocidas según fuentes configuradas.
+- `GET http://localhost:5080/api/v1` respondió correctamente.
+- `/openapi/v1.json` documentó `GetApiInfo`.
+- El usuario sincronizó `main` localmente hasta `8caae70`.
+
+### Incidencias y decisiones
+- Los manifiestos de workloads del SDK .NET 10 presentan incompatibilidad Emscripten 10.0.108 vs. Mono Toolchain que requiere 10.0.109. Los comandos `dotnet workload list` y `dotnet workload update` fallaron; se usó temporalmente `$env:MSBuildEnableWorkloadResolver = "false"` para compilar. Reparación definitiva pendiente.
+- Al ejecutar solo HTTP en puerto 5080 apareció una advertencia de redirección HTTPS. Configuración adecuada pendiente antes de entornos posteriores.
+- Se corrigió un commit local que inicialmente incluía solo la solución; mediante `git add` y `git commit --amend` se incluyó el backend.
+- No se implementaron DB, autenticación ni aislamiento tenant en este incremento.
+
+### Siguiente incremento
+SLOT-005 — PostgreSQL con Docker Compose.
+
+---
+
 ## Convención para futuras entradas
 
 Registrar:
