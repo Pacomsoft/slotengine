@@ -103,6 +103,46 @@ SLOT-005 — PostgreSQL con Docker Compose.
 
 ---
 
+## 2026-11-23 — Cierre de SLOT-005, SLOT-006 y SLOT-007
+
+### SLOT-005 — PostgreSQL local con Docker Compose
+- Se integró `compose.yaml` con PostgreSQL 17, volumen `postgres_data`, health check y puerto publicado solamente en `127.0.0.1`.
+- Se versionó `.env.example` sin contraseña y se corrigieron líneas erróneas en `.gitignore`.
+- Validaciones locales: `docker compose config --quiet`; contenedor `healthy`; `SELECT 1`; creación e inserción en tabla de prueba; persistencia de datos tras reiniciar el contenedor.
+- PR #7: https://github.com/Pacomsoft/slotengine/pull/7
+- Merge en `main`: `5d0390e`.
+
+### SLOT-006 — Configuración por ambiente
+- Se añadió `apps/web/.env.example` con `SLOTENGINE_API_URL`, plantilla `src/SlotEngine.Api/appsettings.Development.example.json` y guía `docs/ENVIRONMENT.md`.
+- Se corrigió `apps/web/.gitignore` para permitir plantillas mientras `.env.local` y `appsettings.Development.json` permanecen ignorados.
+- Validaciones locales: `dotnet build` (con workaround de workloads), `GET /api/v1`, `npm run lint`, `npm run build`, exclusión de secretos y `git diff --cached --check`.
+- PR #8: https://github.com/Pacomsoft/slotengine/pull/8
+- Merge en `main`: `f9508f5`.
+
+### SLOT-007 — Health check de API e integración web
+- ASP.NET Core registra `AddHealthChecks()` y expone `GET /health` mediante `MapHealthChecks()`.
+- Next.js consulta `SLOTENGINE_API_URL/health` desde un Server Component, con timeout de 3 segundos, `cache: "no-store"`, manejo de error y `Suspense` para contenido dinámico.
+- Validaciones locales: build .NET con workaround; `GET /health` devolvió HTTP 200 y `Healthy`; la web mostró `Disponible` y `No Disponible` al encender/apagar la API.
+- La primera implementación mostró un error de prerenderizado por `cacheComponents`; la versión integrada contiene `Suspense`. Frontend CI del PR #9 terminó con éxito: https://github.com/Pacomsoft/slotengine/actions/runs/45310094901
+- PR #9: https://github.com/Pacomsoft/slotengine/pull/9
+- Merge en `main`: `d3e9f0b`.
+- El health check básico no comprueba el estado de PostgreSQL.
+
+### Riesgos y decisiones de continuidad
+- Workloads de .NET 10 desalineados: Emscripten 10.0.108 y Mono 10.0.109; `MSBuildEnableWorkloadResolver=false` es solo un workaround local, no una reparación.
+- La API ejecutada por HTTP local emite advertencia al no tener un puerto HTTPS configurado.
+- El servidor Next.js debe usar una URL de API coherente con el puerto local efectivo (se probaron 5000 y 5080 en distintos pasos).
+- La CI del backend y las pruebas automatizadas iniciales quedan para SLOT-008.
+- Las guías de arranque completo quedan para SLOT-009.
+
+### Estado al cierre
+- PR #7, #8 y #9 integrados en `main`.
+- Último commit confirmado: `d3e9f0b`.
+- Usuario reportó `main` sincronizada y working tree limpio.
+- Próximo incremento: **SLOT-008 — Backend CI y pruebas iniciales**.
+
+---
+
 ## Convención para futuras entradas
 
 Registrar:
