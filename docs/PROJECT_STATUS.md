@@ -1,37 +1,36 @@
-
 # SlotEngine — Project Status
 
-> Última actualización: 2026-11-22
+> Última actualización: 2026-11-23 (hora local America/Monterrey)
 > Estado: Sprint 0 en progreso
-> Fuente de verdad: repositorio GitHub `Pacomsoft/slotengine`
-> Este documento describe el estado confirmado tras integrar PR #5.
+> Fuente de verdad del código: repositorio GitHub `Pacomsoft/slotengine`
+> Fotografía confirmada tras integrar PR #9; verificar GitHub al retomar.
 
 ## 1. Resumen ejecutivo
 
 SlotEngine es una plataforma SaaS multi-tenant y white-label para negocios de servicios.
 
 Stack acordado:
-- Frontend: Next.js, React, TypeScript, Tailwind CSS y shadcn/ui.
-- Backend objetivo: ASP.NET Core Web API y C#.
-- Persistencia objetivo: PostgreSQL y Entity Framework Core.
-- Infraestructura local: Docker Compose.
-- CI/CD: GitHub Actions.
+- Frontend: Next.js 16, React, TypeScript, Tailwind CSS y shadcn/ui.
+- Backend: ASP.NET Core Web API .NET 10 y OpenAPI.
+- Persistencia objetivo: PostgreSQL y Entity Framework Core (EF Core todavía no integrado).
+- Infraestructura local: Docker Compose con PostgreSQL 17.
+- CI/CD: GitHub Actions (CI del frontend; CI del backend pendiente).
 
-Se completaron el frontend con su pipeline de CI y la API inicial en ASP.NET Core .NET 10, con OpenAPI. Aún no existe una base de datos PostgreSQL configurada para el proyecto.
+Se completaron el frontend, la API inicial, PostgreSQL local, las convenciones de configuración por ambiente y una primera integración entre frontend y backend mediante `GET /health`. La API todavía no se conecta a PostgreSQL; no existen autenticación ni aislamiento multi-tenant implementados.
 
 ## 2. Estado confirmado de Git
 
 Repositorio: https://github.com/Pacomsoft/slotengine
 
-Último commit confirmado de main al cierre de sesión:
-`8caae70` — feat(api): initialize ASP.NET Core Web API (#5)
+Último commit confirmado de `main` al cierre:
+`d3e9f0b` — Feat/slot 007 healthcheck web (#9)
 
-Estado local reportado al cierre:
+Estado local reportado por el usuario:
 - Rama: `main`.
 - Sincronizada con `origin/main` mediante `git pull --ff-only`.
-- No se presentó una nueva salida de `git status` después de la sincronización.
+- Working tree limpio tras integrar PR #9.
 
-Verificar nuevamente al iniciar otra sesión: estos datos representan una fotografía del 2026-11-22.
+Este estado local corresponde al cierre reportado; volver a verificar antes de la próxima tarea.
 
 ## 3. Trabajo completado
 
@@ -44,79 +43,71 @@ Verificar nuevamente al iniciar otra sesión: estos datos representan una fotogr
 | SLOT-011 | CI del frontend con GitHub Actions | PR #3, merge `831d78b` |
 | SLOT-012 | Documentación de continuidad | PR #4, merge `8034236` |
 | SLOT-004 | ASP.NET Core Web API .NET 10 y OpenAPI | PR #5, merge `8caae70` |
+| SLOT-005 | PostgreSQL 17 con Docker Compose y volumen persistente | PR #7, merge `5d0390e` |
+| SLOT-006 | Plantillas y convenciones de configuración por ambiente | PR #8, merge `f9508f5` |
+| SLOT-007 | Health check de API y visualización desde Next.js | PR #9, merge `d3e9f0b` |
 
 Validaciones conocidas:
-- Frontend: `npm run lint` exitoso.
-- Frontend: `npm run build` exitoso.
-- Componente Button visualizado localmente.
-- GitHub Actions: workflow Frontend CI ejecutado exitosamente en PR #3.
-- Backend: restore y build locales exitosos, auditoría NuGet sin vulnerabilidades detectadas.
-- Backend: `GET /api/v1` y OpenAPI `/openapi/v1.json` verificados localmente.
-
-Ejecución CI:
-https://github.com/Pacomsoft/slotengine/actions/runs/45078662471
+- Frontend: `npm run lint` y `npm run build` exitosos durante SLOT-006; Frontend CI del PR #9 exitoso (run 45310094901).
+- Backend: `dotnet build SlotEngine.slnx` exitoso con el workaround de workloads documentado.
+- API: `GET /api/v1` y `GET /health` verificados localmente; `GET /health` devolvió HTTP 200 / `Healthy`.
+- PostgreSQL: `docker compose config --quiet`, contenedor `healthy`, consulta SQL y persistencia tras reiniciar el contenedor verificadas localmente.
+- Integración web/API: se mostraron los estados `Disponible` y `No Disponible` según disponibilidad de la API; se agregó `Suspense` por requerimientos de `cacheComponents`.
+- La implementación de health checks actual es básica y no verifica PostgreSQL.
 
 ## 4. Pendientes del Sprint 0
 
-- SLOT-005: configurar PostgreSQL con Docker Compose.
-- SLOT-006: completar y revisar configuración por ambiente.
-- SLOT-007: health check del backend y consumo desde web.
-- SLOT-008: ampliar CI para backend y pruebas iniciales.
-- SLOT-009: documentar ejecución completa desde cero.
+- SLOT-008: ampliar GitHub Actions con CI del backend y pruebas automatizadas iniciales.
+- SLOT-009: documentar el procedimiento completo para ejecutar web, API y DB desde cero.
 
-El frontend cuenta con CI, pero esto no significa que SLOT-008 esté totalmente terminado.
+El frontend ya cuenta con CI. No considerar SLOT-008 completo hasta incorporar y verificar las pruebas y el pipeline del backend.
 
 ## 5. Próximo incremento
 
-**SLOT-005 — PostgreSQL local con Docker Compose.**
+**SLOT-008 — Backend CI y pruebas iniciales.**
 
 Objetivo:
-- Definir una configuración local de PostgreSQL en Docker Compose.
-- Evitar credenciales reales en Git.
-- Verificar arranque, conexión y persistencia local.
+- Definir una prueba automatizada mínima y verificable para la API.
+- Añadir al pipeline de GitHub Actions restore, build y pruebas de .NET.
+- Comprobar el comportamiento del CI en un Pull Request sin exponer secretos.
 
-Pendientes técnicos heredados de SLOT-004:
-- Reparar la incompatibilidad de manifiestos workloads de .NET 10. El build local se validó con `MSBuildEnableWorkloadResolver=false` establecido temporalmente.
-- Resolver la configuración de redirección HTTPS para ambientes posteriores.
-- El CI de backend se agregará en SLOT-008.
+Pendientes técnicos conocidos:
+- Reparar la incompatibilidad de manifiestos workloads del SDK .NET 10: Emscripten 10.0.108 vs. Mono Toolchain que requiere 10.0.109. En desarrollo local se utilizó temporalmente `$env:MSBuildEnableWorkloadResolver = "false"`.
+- Revisar la advertencia de redirección HTTPS al usar la API solo sobre HTTP local.
+- Planificar integración real de PostgreSQL mediante EF Core en un incremento posterior.
+- La URL de API usada por la web depende de `SLOTENGINE_API_URL`; al probar localmente deben coincidir sus puertos con los de la API.
 
 ## 6. Decisiones y convenciones vigentes
 
 - Monorepo y monolito modular como arquitectura inicial.
-- `main` como rama principal.
-- Ramas cortas por tarea.
-- Conventional Commits.
-- Pull Requests con revisión y validación.
-- Squash and merge como estrategia habitual.
-- No declarar una tarea terminada sin evidencia.
-- No inventar archivos, endpoints o implementaciones.
+- `main` como rama principal; ramas cortas por tarea.
+- Conventional Commits, Pull Requests revisados y Squash and merge como estrategia habitual.
+- Configuración y secretos locales fuera de Git; versionar únicamente plantillas sin credenciales.
+- En Next.js, el estado de la API se consulta desde un Server Component, con timeout, manejo de error y `Suspense` para la petición dinámica.
+- Un endpoint `/health` básico no prueba el estado de toda la infraestructura.
+- No declarar tareas terminadas sin evidencia ni inventar implementaciones.
 
 ## 7. Protocolo de reanudación
 
-Al comenzar una sesión nueva, el Engineering Agent debe:
-
+Al comenzar una nueva sesión:
 1. Consultar `instrucciones.md`.
-2. Leer este archivo y `docs/ROADMAP.md`.
-3. Consultar `docs/ENGINEERING_LOG.md` para conocer decisiones recientes.
-4. Verificar en GitHub los últimos commits y PRs integrados.
-5. Contrastar la documentación con el estado real del repositorio.
-6. Si existe una diferencia, explicarla antes de proponer comandos.
-7. Retomar la siguiente tarea pendiente, sin repetir trabajo terminado.
+2. Leer este archivo, `docs/ROADMAP.md` y `docs/ENGINEERING_LOG.md`.
+3. Verificar los últimos commits y PRs integrados en GitHub.
+4. Contrastar documentación y repositorio; informar discrepancias.
+5. Confirmar el estado local de Git antes de crear una rama de trabajo.
+6. Retomar SLOT-008 sin repetir tareas ya completadas.
 
 Prioridad ante contradicciones:
-- Para saber qué código está integrado: verificar GitHub y Git.
-- Para decisiones y metodología: consultar la documentación rectora.
-- Para el plan vigente: consultar este archivo y ROADMAP, contrastándolos con GitHub.
-
-No asumir que el último fragmento de conversación disponible representa el estado actual.
+- Código integrado: GitHub y Git.
+- Decisiones y metodología: instrucciones rectoras y documentación.
+- Plan vigente: este archivo y ROADMAP contrastados con GitHub.
 
 ## 8. Regla de cierre de sesión
 
-Después de un incremento importante:
-- Actualizar este documento.
-- Registrar los cambios y decisiones relevantes en ENGINEERING_LOG.
-- Actualizar ROADMAP si cambió el estado de alguna tarea.
-- Referenciar PRs y commits como evidencia.
-- Definir el siguiente incremento.
+Al terminar un incremento:
+- Confirmar integraciones en `main`.
+- Actualizar este documento, ENGINEERING_LOG y ROADMAP con evidencias.
+- Identificar pendientes, riesgos y siguiente incremento.
+- Indicar si los archivos adjuntos a ChatGPT requieren sincronización.
 
 La documentación no reemplaza la verificación del repositorio.
