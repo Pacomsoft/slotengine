@@ -1,0 +1,120 @@
+# SlotEngine — Environment Configuration
+
+## 1. Overview
+
+SlotEngine separates application code from environment-specific configuration.
+
+The initial environments are:
+
+- **Development:** local workstation, Docker Compose and local configuration.
+- **Staging:** future integration and validation environment using synthetic data.
+- **Production:** future deployment with managed secrets, HTTPS and operational monitoring.
+
+Only the local development environment is currently implemented.
+
+## 2. Frontend — Next.js
+
+Location: `apps/web`
+
+| File | Purpose | Versioned |
+| --- | --- | --- |
+| `.env.example` | Example configuration | Yes |
+| `.env.local` | Local development configuration | No |
+
+To initialize local configuration:
+
+```powershell
+Copy-Item apps/web/.env.example apps/web/.env.local
+```
+
+Available variable:
+
+- `SLOTENGINE_API_URL`: backend API address for future server-side integrations. Default example: `http://localhost:5080`.
+
+This variable is not currently consumed by the frontend.
+
+Do not add `NEXT_PUBLIC_` to sensitive configuration. Variables with that prefix can be exposed to browser code.
+
+## 3. Backend — ASP.NET Core
+
+Location: `src/SlotEngine.Api`
+
+| File | Purpose | Versioned |
+| --- | --- | --- |
+| `appsettings.json` | Shared application configuration | Yes |
+| `appsettings.Development.example.json` | Development configuration template | Yes |
+| `appsettings.Development.json` | Local Development overrides | No |
+
+Initialize local configuration:
+
+```powershell
+Copy-Item src/SlotEngine.Api/appsettings.Development.example.json src/SlotEngine.Api/appsettings.Development.json
+```
+
+For local development, set `ASPNETCORE_ENVIRONMENT=Development`.
+
+ASP.NET Core loads environment-specific configuration automatically when the corresponding file exists.
+
+The API does not yet use a PostgreSQL connection string.
+
+## 4. Database — PostgreSQL
+
+Location: repository root.
+
+| File | Purpose | Versioned |
+| --- | --- | --- |
+| `compose.yaml` | Local PostgreSQL service definition | Yes |
+| `.env.example` | PostgreSQL variable names and example values | Yes |
+| `.env` | Local PostgreSQL configuration and credentials | No |
+
+Required variables:
+
+- `POSTGRES_USER`
+- `POSTGRES_PASSWORD`
+- `POSTGRES_DB`
+- `POSTGRES_PORT`
+
+Initialize configuration:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+Set a strong local password before starting Docker Compose.
+
+Start PostgreSQL:
+
+```powershell
+docker compose up -d
+```
+
+Validate configuration without printing expanded secrets:
+
+```powershell
+docker compose config --quiet
+```
+
+Never commit `.env` or disclose credentials in logs, screenshots or Pull Requests.
+
+## 5. Security rules
+
+- Do not store production secrets in source control.
+- Example files must not contain real credentials.
+- Keep database ports bound to localhost during local development.
+- Use managed secret storage for future deployed environments.
+- Do not assume that frontend environment variables are private when exposed to browser code.
+- Do not use development credentials in production.
+
+## 6. Known limitations
+
+- The local .NET 10 SDK has a workload manifest compatibility issue. Builds have been validated using `MSBuildEnableWorkloadResolver=false` as a temporary workaround.
+- HTTPS redirection requires appropriate configuration for the target environment.
+- Backend CI and automated configuration tests are pending.
+- Staging and production infrastructure are not yet implemented.
+
+## 7. Future work
+
+- SLOT-007: backend health check and frontend integration.
+- SLOT-008: backend CI and initial automated tests.
+- SLOT-009: complete setup instructions for running the project from scratch.
+- Future functional increments: database persistence and migrations with Entity Framework Core.
