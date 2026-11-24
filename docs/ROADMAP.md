@@ -1,6 +1,6 @@
 # SlotEngine — Roadmap y backlog inicial
 
-> Estado: planificación v0.1 · Fecha: 2026-11-22
+> Estado: Sprint 0 en progreso · Actualización: 2026-11-23
 
 ## Objetivo de aprendizaje
 Construir, probar, versionar y desplegar una aplicación SaaS real, adquiriendo autonomía en frontend, backend, SQL, APIs, Git, pruebas, seguridad y CI/CD.
@@ -31,9 +31,9 @@ Las etiquetas de versión pueden cambiar después de definir un esquema formal d
 - [X] SLOT-002 Crear repositorio GitHub y archivos base.
 - [X] SLOT-003 Inicializar frontend Next.js + TypeScript.
 - [x] SLOT-004 Inicializar ASP.NET Core Web API y OpenAPI.
-- [ ] SLOT-005 Configurar PostgreSQL local con Docker Compose.
-- [ ] SLOT-006 Configurar variables por ambiente y `.gitignore`.
-- [ ] SLOT-007 Agregar health check del backend y consumirlo desde web.
+- [x] SLOT-005 Configurar PostgreSQL local con Docker Compose.
+- [x] SLOT-006 Configurar variables por ambiente y `.gitignore`.
+- [x] SLOT-007 Agregar health check del backend y consumirlo desde web.
 - [ ] SLOT-008 Configurar CI: build, lint y tests iniciales.
 - [ ] SLOT-009 Documentar cómo ejecutar el proyecto desde cero.
 - [x] SLOT-010 Configurar shadcn/ui y validar primer componente.
@@ -41,11 +41,14 @@ Las etiquetas de versión pueden cambiar después de definir un esquema formal d
 - [x] SLOT-012 Establecer documentación de continuidad del proyecto.
 
 **Notas de avance:**
-- SLOT-006 tiene trabajo inicial realizado mediante `.gitignore`, pero aún falta revisar configuración por ambiente.
-- SLOT-008 está parcialmente cubierto por SLOT-011. Faltan CI de backend y pruebas iniciales.
-- SLOT-012 integrado en PR #4 (`8034236`).
-- SLOT-004 integrado en PR #5 (`8caae70`); siguiente: SLOT-005.
-- Pendiente técnico: reparar manifiestos workloads de .NET 10 y configurar HTTPS apropiadamente.
+- SLOT-004 integrado en PR #5 (`8caae70`).
+- SLOT-005 integrado en PR #7 (`5d0390e`): PostgreSQL 17 local en Docker Compose.
+- SLOT-006 integrado en PR #8 (`f9508f5`): plantillas de configuración y documentación de ambientes.
+- SLOT-007 integrado en PR #9 (`d3e9f0b`): `GET /health` y consumo desde Next.js; Frontend CI en verde.
+- SLOT-008 sigue pendiente: existe CI del frontend por SLOT-011, pero falta CI del backend y pruebas automatizadas iniciales.
+- SLOT-009 sigue pendiente: guía completa de ejecución desde cero.
+- Pendientes técnicos: reparar manifiestos de workloads de .NET 10 y configurar HTTPS adecuadamente.
+- Próximo incremento: **SLOT-008 — Backend CI y pruebas iniciales**.
 
 **Definición de terminado:** un nuevo desarrollador puede seguir README para ejecutar web, API y DB; al hacer PR, el pipeline valida build y pruebas.
 
