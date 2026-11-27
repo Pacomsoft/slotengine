@@ -2,4 +2,7 @@
   <Folder Name="/src/">
     <Project Path="src/SlotEngine.Api/SlotEngine.Api.csproj" />
   </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/SlotEngine.Api.IntegrationTests/SlotEngine.Api.IntegrationTests.csproj" />
+  </Folder>
 </Solution>

@@ -1,0 +1,42 @@
+name: Backend CI
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - src/**
+      - tests/**
+      - SlotEngine.slnx
+      - .github/workflows/backend-ci.yml
+permissions:
+  contents: read
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+    # Checkout the repository
+    - name: Checkout repository
+      uses: actions/checkout@v6
+
+    # Setup .NET
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v6
+      with:
+        dotnet-version: 10.0.x
+
+    # Verify SDK
+    - name: Verify .NET SDK
+      run: dotnet --version
+
+    # Restore
+    - name: Restore dependencies
+      run: dotnet restore SlotEngine.slnx
+
+    # Build
+    - name: Build
+      run: dotnet build SlotEngine.slnx --no-restore --configuration Release
+
+    # Test
+    - name: Test
+      run: dotnet test SlotEngine.slnx --no-build --verbosity normal --configuration Release
