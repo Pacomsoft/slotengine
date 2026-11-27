@@ -33,4 +33,4 @@ npm-debug.log*
 .local/
 
 #Personal document
-docs/learning/PRACTITIONER_PROFILE.md
+/docs/learning/PRACTITIONER_PROFILE.md
