@@ -143,6 +143,19 @@ SLOT-005 — PostgreSQL con Docker Compose.
 
 ---
 
+## 2026-11-26 — Cierre de SLOT-008: Backend CI y pruebas iniciales
+
+- PR #11 integrado en `8fade66`: proyecto xUnit `tests/SlotEngine.Api.IntegrationTests` (net10.0), referencia a API y Mvc.Testing 10.0.15; pruebas GET /health y GET /api/v1 mediante WebApplicationFactory, cliente HTTPS en memoria y sin redirecciones automáticas. Se eliminó la prueba didáctica.
+- Backend CI en Ubuntu: pull_request hacia main con filtros de rutas, permisos contents: read, restore, build Release sin restore y test Release sin build. PR #11 pasó 2 pruebas pero seleccionó SDK 11.0.100.
+- PR #12 integrado en `b423b52`: global.json con SDK 10.0.404, latestFeature y allowPrerelease=false; setup-dotnet lee el archivo; filtro global.json y validación Bash de versión 10.0.*.
+- Evidencia: validación local con SDK 10.0.404; CI PR #12 https://github.com/Pacomsoft/slotengine/actions/runs/45921659467/job/140253556213 confirmó SDK 10.0.404, ambos proyectos compilados en Release, 0 warnings, 0 errores y 2 pruebas exitosas. Auditoría local de dependencias directas y transitivas sin vulnerabilidades conocidas según fuentes consultadas.
+- Decisiones: mantener SDK 10 con flexibilidad controlada de feature bands; separar restore/build/test; evitar duplicar configuración del SDK; pruebas de integración sin PostgreSQL ni servidor externo.
+- Aprendizajes: AAA, assertions, async/await, IDisposable, JSON semántico, NuGet, staging de eliminaciones, Bash y códigos de salida. Un pipeline verde no garantiza todos los criterios si no se verifican explícitamente.
+- Pendientes: la rama negativa del script no se ejecutó deliberadamente en CI; HTTPS de producción y health check de PostgreSQL siguen pendientes. La incidencia histórica de workloads no bloqueó el build actual, pero no se verificaron todos los workloads. Protección de ramas por planificar.
+- Estado local reportado: main sincronizada y limpia; GitHub confirmó PR #12 integrado y HEAD `b423b52`. Próximo incremento: SLOT-009, documentación de ejecución local desde cero.
+
+---
+
 ## Convención para futuras entradas
 
 Registrar:

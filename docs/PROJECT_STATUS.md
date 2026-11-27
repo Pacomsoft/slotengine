@@ -1,9 +1,9 @@
 # SlotEngine — Project Status
 
-> Última actualización: 2026-11-23 (hora local America/Monterrey)
+> Última actualización: 2026-11-26 (hora local America/Monterrey)
 > Estado: Sprint 0 en progreso
 > Fuente de verdad del código: repositorio GitHub `Pacomsoft/slotengine`
-> Fotografía confirmada tras integrar PR #9; verificar GitHub al retomar.
+> Fotografía confirmada tras integrar PR #12; verificar GitHub al retomar.
 
 ## 1. Resumen ejecutivo
 
@@ -14,7 +14,7 @@ Stack acordado:
 - Backend: ASP.NET Core Web API .NET 10 y OpenAPI.
 - Persistencia objetivo: PostgreSQL y Entity Framework Core (EF Core todavía no integrado).
 - Infraestructura local: Docker Compose con PostgreSQL 17.
-- CI/CD: GitHub Actions (CI del frontend; CI del backend pendiente).
+- CI/CD: GitHub Actions (CI del frontend y backend operativos).
 
 Se completaron el frontend, la API inicial, PostgreSQL local, las convenciones de configuración por ambiente y una primera integración entre frontend y backend mediante `GET /health`. La API todavía no se conecta a PostgreSQL; no existen autenticación ni aislamiento multi-tenant implementados.
 
@@ -23,12 +23,12 @@ Se completaron el frontend, la API inicial, PostgreSQL local, las convenciones d
 Repositorio: https://github.com/Pacomsoft/slotengine
 
 Último commit confirmado de `main` al cierre:
-`d3e9f0b` — Feat/slot 007 healthcheck web (#9)
+`b423b52` — fix(ci): enforce .NET 10 SDK selection (#12)
 
 Estado local reportado por el usuario:
 - Rama: `main`.
 - Sincronizada con `origin/main` mediante `git pull --ff-only`.
-- Working tree limpio tras integrar PR #9.
+- Working tree limpio tras integrar PR #12.
 
 Este estado local corresponde al cierre reportado; volver a verificar antes de la próxima tarea.
 
@@ -47,7 +47,13 @@ Este estado local corresponde al cierre reportado; volver a verificar antes de l
 | SLOT-006 | Plantillas y convenciones de configuración por ambiente | PR #8, merge `f9508f5` |
 | SLOT-007 | Health check de API y visualización desde Next.js | PR #9, merge `d3e9f0b` |
 
+| SLOT-008 | Backend CI, xUnit y política de SDK | PR #11 (`8fade66`), PR #12 (`b423b52`) |
+
 Validaciones conocidas:
+- Backend CI PR #12: SDK efectivo 10.0.404, restore/build/test en Release exitosos, 0 warnings y 0 errores, 2 pruebas aprobadas. Run: https://github.com/Pacomsoft/slotengine/actions/runs/45921659467
+- Auditoría local NuGet directa y transitiva sin vulnerabilidades conocidas según fuentes consultadas.
+- `global.json`: 10.0.404, latestFeature, allowPrerelease=false; workflow instala desde el archivo y verifica la versión mediante Bash.
+- Pendiente: verificar la rama negativa del script si se requiere, y planificar protección de ramas.
 - Frontend: `npm run lint` y `npm run build` exitosos durante SLOT-006; Frontend CI del PR #9 exitoso (run 45310094901).
 - Backend: `dotnet build SlotEngine.slnx` exitoso con el workaround de workloads documentado.
 - API: `GET /api/v1` y `GET /health` verificados localmente; `GET /health` devolvió HTTP 200 / `Healthy`.
@@ -57,22 +63,21 @@ Validaciones conocidas:
 
 ## 4. Pendientes del Sprint 0
 
-- SLOT-008: ampliar GitHub Actions con CI del backend y pruebas automatizadas iniciales.
 - SLOT-009: documentar el procedimiento completo para ejecutar web, API y DB desde cero.
 
-El frontend ya cuenta con CI. No considerar SLOT-008 completo hasta incorporar y verificar las pruebas y el pipeline del backend.
+SLOT-008 completado técnicamente; ambos pipelines operativos. Sprint 0: 11 de 12 tareas, pendiente SLOT-009.
 
 ## 5. Próximo incremento
 
-**SLOT-008 — Backend CI y pruebas iniciales.**
+**SLOT-009 — Documentación de ejecución local.**
 
 Objetivo:
-- Definir una prueba automatizada mínima y verificable para la API.
-- Añadir al pipeline de GitHub Actions restore, build y pruebas de .NET.
-- Comprobar el comportamiento del CI en un Pull Request sin exponer secretos.
+- Documentar requisitos y arranque desde cero de web, API y PostgreSQL.
+- Incluir política de SDK, configuración local, validaciones y troubleshooting.
+- Verificar la guía con una ejecución reproducible y sin secretos versionados.
 
 Pendientes técnicos conocidos:
-- Reparar la incompatibilidad de manifiestos workloads del SDK .NET 10: Emscripten 10.0.108 vs. Mono Toolchain que requiere 10.0.109. En desarrollo local se utilizó temporalmente `$env:MSBuildEnableWorkloadResolver = "false"`.
+- La incidencia histórica de workloads no bloqueó build/test con SDK 10.0.404; reparación integral de workloads no verificada.
 - Revisar la advertencia de redirección HTTPS al usar la API solo sobre HTTP local.
 - Planificar integración real de PostgreSQL mediante EF Core en un incremento posterior.
 - La URL de API usada por la web depende de `SLOTENGINE_API_URL`; al probar localmente deben coincidir sus puertos con los de la API.
@@ -95,7 +100,7 @@ Al comenzar una nueva sesión:
 3. Verificar los últimos commits y PRs integrados en GitHub.
 4. Contrastar documentación y repositorio; informar discrepancias.
 5. Confirmar el estado local de Git antes de crear una rama de trabajo.
-6. Retomar SLOT-008 sin repetir tareas ya completadas.
+6. Retomar SLOT-009 sin repetir tareas ya completadas.
 
 Prioridad ante contradicciones:
 - Código integrado: GitHub y Git.
