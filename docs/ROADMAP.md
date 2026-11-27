@@ -1,6 +1,6 @@
 # SlotEngine — Roadmap y backlog inicial
 
-> Estado: Sprint 0 en progreso · Actualización: 2026-11-23
+> Estado: Sprint 0 en progreso · Actualización: 2026-11-26
 
 ## Objetivo de aprendizaje
 Construir, probar, versionar y desplegar una aplicación SaaS real, adquiriendo autonomía en frontend, backend, SQL, APIs, Git, pruebas, seguridad y CI/CD.
@@ -34,7 +34,7 @@ Las etiquetas de versión pueden cambiar después de definir un esquema formal d
 - [x] SLOT-005 Configurar PostgreSQL local con Docker Compose.
 - [x] SLOT-006 Configurar variables por ambiente y `.gitignore`.
 - [x] SLOT-007 Agregar health check del backend y consumirlo desde web.
-- [ ] SLOT-008 Configurar CI: build, lint y tests iniciales.
+- [x] SLOT-008 Configurar CI: build, lint y tests iniciales.
 - [ ] SLOT-009 Documentar cómo ejecutar el proyecto desde cero.
 - [x] SLOT-010 Configurar shadcn/ui y validar primer componente.
 - [x] SLOT-011 Configurar CI del frontend con GitHub Actions.
@@ -45,9 +45,9 @@ Las etiquetas de versión pueden cambiar después de definir un esquema formal d
 - SLOT-005 integrado en PR #7 (`5d0390e`): PostgreSQL 17 local en Docker Compose.
 - SLOT-006 integrado en PR #8 (`f9508f5`): plantillas de configuración y documentación de ambientes.
 - SLOT-007 integrado en PR #9 (`d3e9f0b`): `GET /health` y consumo desde Next.js; Frontend CI en verde.
-- SLOT-008 sigue pendiente: existe CI del frontend por SLOT-011, pero falta CI del backend y pruebas automatizadas iniciales.
+- SLOT-008 completado: PR #11 (`8fade66`) y PR #12 (`b423b52`); Backend CI con SDK 10.0.404 y dos pruebas de integración exitosas en Release.
 - SLOT-009 sigue pendiente: guía completa de ejecución desde cero.
-- Pendientes técnicos: reparar manifiestos de workloads de .NET 10 y configurar HTTPS adecuadamente.
+- Pendientes técnicos: verificar integralmente los workloads (no bloquean el build actual), configurar HTTPS adecuadamente y planificar protección de ramas.
 - Próximo incremento: **SLOT-008 — Backend CI y pruebas iniciales**.
 
 **Definición de terminado:** un nuevo desarrollador puede seguir README para ejecutar web, API y DB; al hacer PR, el pipeline valida build y pruebas.
