@@ -91,3 +91,18 @@ Los comandos exactos de instalación y ejecución se publicarán en `README.md` 
 
 ## 12. Código de conducta
 Tratar a colaboradores con respeto, dar feedback técnico específico y mantener discusiones orientadas a hechos. Una política formal `CODE_OF_CONDUCT.md` se añadirá antes de abrir la colaboración pública a terceros.
+
+## 13. Colaboración y entrega profesional (propuesta)
+
+- Refinar problemas y criterios antes de implementar; explicitar dudas y dependencias.
+- PR: distinguir bloqueantes, sugerencias y preguntas; autor responde con evidencia. Revisiones simuladas no equivalen a aprobación independiente.
+- Mantener ramas cortas; practicar Gitflow, hotfix y conflictos en ramas de laboratorio sin afectar main.
+- Antes de liberar: identificar versión y artefacto, ambiente, checks, impacto de datos, responsable, comunicación, smoke tests y estrategia de recuperación. Los controles se introducen según riesgo.
+- Revisar resultados en playback/review y adaptar el proceso en retrospectiva.
+- Al cierre elaborar reporte HTML según instrucciones rectoras y registrar evidencia de aprendizaje.
+
+## 14. Evaluación del aprendizaje
+
+- Distinguir evidencia técnica del producto y evidencia de competencia individual.
+- Aplicar evaluación adaptativa según el protocolo rector, con prácticas de análisis, debugging, código y comunicación.
+- Conservar el perfil y respuestas individuales en fuentes privadas; no versionarlos en el repositorio público sin consentimiento específico. Los reportes de aprendizaje públicos se limitan a contenido técnico no personal.
