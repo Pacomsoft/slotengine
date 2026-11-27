@@ -1,6 +1,6 @@
 # SlotEngine — Roadmap y backlog inicial
 
-> Estado: Sprint 0 en progreso · Actualización: 2026-11-26
+> Estado: Sprint 0 en progreso · Actualización: 2026-11-27
 
 ## Objetivo de aprendizaje
 Construir, probar, versionar y desplegar una aplicación SaaS real, adquiriendo autonomía en frontend, backend, SQL, APIs, Git, pruebas, seguridad y CI/CD.
@@ -48,7 +48,9 @@ Las etiquetas de versión pueden cambiar después de definir un esquema formal d
 - SLOT-008 completado: PR #11 (`8fade66`) y PR #12 (`b423b52`); Backend CI con SDK 10.0.404 y dos pruebas de integración exitosas en Release.
 - SLOT-009 sigue pendiente: guía completa de ejecución desde cero.
 - Pendientes técnicos: verificar integralmente los workloads (no bloquean el build actual), configurar HTTPS adecuadamente y planificar protección de ramas.
-- Próximo incremento: **SLOT-008 — Backend CI y pruebas iniciales**.
+- Próximo incremento: **SLOT-009 — Developer Onboarding**.
+- PR #13 y #14 integrados; consultar `learning/ENGINEERING_LEARNING_ROADMAP.md` y `learning/ASSESSMENT_PROTOCOL.md`.
+- Tras SLOT-009: revisión/retrospectiva de Sprint 0 y diagnóstico de competencias; refinar ADR hexagonal y tenancy, dependencias de identidad y hosting antes de las primeras vertical slices.
 
 **Definición de terminado:** un nuevo desarrollador puede seguir README para ejecutar web, API y DB; al hacer PR, el pipeline valida build y pruebas.
 

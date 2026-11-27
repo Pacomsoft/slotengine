@@ -1,9 +1,9 @@
 # SlotEngine — Project Status
 
-> Última actualización: 2026-11-26 (hora local America/Monterrey)
+> Última actualización: 2026-11-27 (hora local America/Monterrey)
 > Estado: Sprint 0 en progreso
 > Fuente de verdad del código: repositorio GitHub `Pacomsoft/slotengine`
-> Fotografía confirmada tras integrar PR #12; verificar GitHub al retomar.
+> Fotografía confirmada tras integrar PR #14; verificar GitHub al retomar.
 
 ## 1. Resumen ejecutivo
 
@@ -23,12 +23,12 @@ Se completaron el frontend, la API inicial, PostgreSQL local, las convenciones d
 Repositorio: https://github.com/Pacomsoft/slotengine
 
 Último commit confirmado de `main` al cierre:
-`b423b52` — fix(ci): enforce .NET 10 SDK selection (#12)
+`fb44bed` — Docs/slot 008 learn (#14)
 
 Estado local reportado por el usuario:
 - Rama: `main`.
 - Sincronizada con `origin/main` mediante `git pull --ff-only`.
-- Working tree limpio tras integrar PR #12.
+- Working tree limpio tras integrar PR #14.
 
 Este estado local corresponde al cierre reportado; volver a verificar antes de la próxima tarea.
 
@@ -60,6 +60,10 @@ Validaciones conocidas:
 - PostgreSQL: `docker compose config --quiet`, contenedor `healthy`, consulta SQL y persistencia tras reiniciar el contenedor verificadas localmente.
 - Integración web/API: se mostraron los estados `Disponible` y `No Disponible` según disponibilidad de la API; se agregó `Suspense` por requerimientos de `cacheComponents`.
 - La implementación de health checks actual es básica y no verifica PostgreSQL.
+
+## Refinamiento metodológico (2026-11-27)
+
+PR #13 (`bca50d1`) y #14 (`fb44bed`) integrados, confirmados mediante GitHub. Roadmap de aprendizaje y protocolo de evaluación disponibles en `docs/learning/`. Dirección hexagonal propuesta, pendiente ADR e implementación. No se modificó runtime en los ejercicios de esta sesión. Branch cleanup reportado: 12 ramas locales y 15 remotas eliminadas, main intacta. Verificación individual previa incompleta; no afirmar ausencia de commits únicos en todas las ramas. Perfil de competencias privado.
 
 ## 4. Pendientes del Sprint 0
 

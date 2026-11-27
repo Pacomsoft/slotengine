@@ -156,6 +156,18 @@ SLOT-005 — PostgreSQL con Docker Compose.
 
 ---
 
+## 2026-11-27 — Refinamiento metodológico y mantenimiento Git (SLOT-008, seguimiento)
+
+- PR #13 (`bca50d1`) y #14 (`fb44bed`) confirmados como integrados en GitHub. Se consultaron el protocolo de evaluación y el roadmap de aprendizaje en `docs/learning/`.
+- Dirección propuesta: arquitectura hexagonal dentro del monolito modular, ADR pendiente; conservar stack y flujo Git. Integrar análisis, Enterprise Design Thinking, Scrum, release management y evaluación adaptativa.
+- Ejercicios: commit/push/PR, amend, ignore vs untracking, referencias locales/remotas, squash y ascendencia, diff y branch cleanup.
+- Evidencia de terminal: `git branch -r -d` eliminó solo la referencia local; fetch la recuperó. `git push origin --delete` eliminó realmente dos ramas. El resto se eliminó por interfaz GitHub, seguido de prune y eliminación local múltiple. HEAD final `fb44bed`, working tree limpio, solo main según salida de terminal.
+- Riesgo: se omitió verificación preventiva individual de todas las ramas. No confundir diff vacío con prueba de historial; `--check` no comprueba equivalencia. Reforzar guardrails y verificar PR/head antes de borrar. No se ejecutaron builds ni tests de aplicación en esta sesión.
+- Reporte público: [2026-11-27-SLOT-008-git-maintenance.html](learning/2026-11-27-SLOT-008-git-maintenance.html). Evaluación individual conservada aparte en perfil privado.
+- Siguiente: SLOT-009 (onboarding reproducible), cierre Sprint 0 y diagnóstico inicial. Pendientes: ADR hexagonal/tenancy, protección de ramas, HTTPS, integración DB y staging.
+
+---
+
 ## Convención para futuras entradas
 
 Registrar:
