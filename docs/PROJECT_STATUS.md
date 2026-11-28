@@ -1,7 +1,7 @@
 # SlotEngine — Project Status
 
 > Última actualización: 2026-11-27 (hora local America/Monterrey)
-> Estado: Sprint 0 en progreso
+> Estado: Sprint 0 técnicamente completado
 > Fuente de verdad del código: repositorio GitHub `Pacomsoft/slotengine`
 > Fotografía confirmada tras integrar PR #14; verificar GitHub al retomar.
 
@@ -23,7 +23,7 @@ Se completaron el frontend, la API inicial, PostgreSQL local, las convenciones d
 Repositorio: https://github.com/Pacomsoft/slotengine
 
 Último commit confirmado de `main` al cierre:
-`fb44bed` — Docs/slot 008 learn (#14)
+`f33aa63` — Chore/slot 009 config onboarding (#16)
 
 Estado local reportado por el usuario:
 - Rama: `main`.
@@ -67,13 +67,13 @@ PR #13 (`bca50d1`) y #14 (`fb44bed`) integrados, confirmados mediante GitHub. Ro
 
 ## 4. Pendientes del Sprint 0
 
-- SLOT-009: documentar el procedimiento completo para ejecutar web, API y DB desde cero.
+- SLOT-009: completado mediante PR #16.
 
-SLOT-008 completado técnicamente; ambos pipelines operativos. Sprint 0: 11 de 12 tareas, pendiente SLOT-009.
+SLOT-008 completado técnicamente; ambos pipelines operativos. Sprint 0: 12 de 12 tareas integradas.
 
 ## 5. Próximo incremento
 
-**SLOT-009 — Documentación de ejecución local.**
+**Siguiente: refinamiento de Business Foundation y ADRs.**
 
 Objetivo:
 - Documentar requisitos y arranque desde cero de web, API y PostgreSQL.
@@ -120,3 +120,7 @@ Al terminar un incremento:
 - Indicar si los archivos adjuntos a ChatGPT requieren sincronización.
 
 La documentación no reemplaza la verificación del repositorio.
+
+## Cierre técnico Sprint 0 — 2026-11-27
+SLOT-009 integrado en PR #16 (`f33aa63`); clonación local independiente, PostgreSQL aislado healthy, SDK 10.0.404, Node 24.14.0, npm ci, lint/build y backend Release 2/2 pruebas. API /health, /api/v1 y OpenAPI verificados; Next.js eligió 3007 por conflicto de puerto. La captura no identifica URL. npm audit y --omit=dev: 4 hallazgos moderados en cadena shadcn → ts-morph → @ts-morph/common → minimatch (GHSA-g3hv-75wg-m249); remediación pendiente antes de exposición pública. HTTPS y protección de ramas pendientes. No se verificó CI específico de PR #16 ni instalación en otra máquina.
+Próximo: revisar dependencias, refinar HU-001, identidad, tenancy, ADR hexagonal y hosting antes de implementar. Diagnóstico inicial distribuido en prácticas breves.
