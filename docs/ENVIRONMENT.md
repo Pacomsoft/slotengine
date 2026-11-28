@@ -29,9 +29,9 @@ Copy-Item apps/web/.env.example apps/web/.env.local
 
 Available variable:
 
-- `SLOTENGINE_API_URL`: backend API address for future server-side integrations. Default example: `http://localhost:5080`.
+- `SLOTENGINE_API_URL`: backend API address: `http://localhost:5140`.
 
-This variable is not currently consumed by the frontend.
+The frontend uses this variable to perform server-side health checks against the backend API, which listens on port 5140 by default when using the HTTP launch profile.
 
 Do not add `NEXT_PUBLIC_` to sensitive configuration. Variables with that prefix can be exposed to browser code.
 
