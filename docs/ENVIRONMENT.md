@@ -114,7 +114,10 @@ Never commit `.env` or disclose credentials in logs, screenshots or Pull Request
 
 ## 7. Future work
 
-- SLOT-007: backend health check and frontend integration.
-- SLOT-008: backend CI and initial automated tests.
-- SLOT-009: complete setup instructions for running the project from scratch.
+- SLOT-007: completed — basic API health check and frontend integration.
+- SLOT-008: completed — backend CI and initial integration tests.
+- SLOT-009: completed — see [README](../README.md).
 - Future functional increments: database persistence and migrations with Entity Framework Core.
+
+## Local validation notes
+Next.js may choose another port if 3000 is occupied; use the URL printed by the dev server. The HTTP launch profile uses port 5140 and may log an HTTPS redirection warning. Backend health does not check PostgreSQL. For isolated labs, use a distinct Compose project name (`-p`) and host port, preserving named volumes.
