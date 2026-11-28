@@ -106,3 +106,6 @@ Tratar a colaboradores con respeto, dar feedback técnico específico y mantener
 - Distinguir evidencia técnica del producto y evidencia de competencia individual.
 - Aplicar evaluación adaptativa según el protocolo rector, con prácticas de análisis, debugging, código y comunicación.
 - Conservar el perfil y respuestas individuales en fuentes privadas; no versionarlos en el repositorio público sin consentimiento específico. Los reportes de aprendizaje públicos se limitan a contenido técnico no personal.
+
+## Retrospectiva Sprint 0 — aprendizaje asistido por IA
+Explicar, permitir ejecución autónoma, revisar, corregir o asistir y avanzar. No bloquear por estilo o redacción salvo impacto funcional, seguridad o exactitud. Escalar asistencia cuando la repetición no aporte aprendizaje; generar documentación extensa con IA y verificar contra evidencia. Evaluación breve y espaciada durante tareas reales; diagnóstico inicial distribuido. Mantener controles esenciales y distinguir asistencia de autonomía.

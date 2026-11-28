@@ -33,3 +33,6 @@ Antes de evaluar, informar modalidad y restricciones generales sin revelar respu
 
 ## Persistencia y privacidad
 Perfil individual privado, actualizado al cierre y leído al reanudar. Mantener historial de cambios y referencias a evidencia; no publicar respuestas o resultados personales sin consentimiento específico. Si no se puede actualizar la fuente persistente, entregar copia descargable e indicar sincronización. Reporte HTML de sesión mantiene glosario bilingüe, conceptos, decisiones, ejemplos, referencias, repaso con respuestas separadas y evaluación cuando corresponda. No hay seguimiento fuera de sesiones activas.
+
+## Retrospectiva Sprint 0 — aprendizaje asistido por IA
+Explicar, permitir ejecución autónoma, revisar, corregir o asistir y avanzar. No bloquear por estilo o redacción salvo impacto funcional, seguridad o exactitud. Escalar asistencia cuando la repetición no aporte aprendizaje; generar documentación extensa con IA y verificar contra evidencia. Evaluación breve y espaciada durante tareas reales; diagnóstico inicial distribuido. Mantener controles esenciales y distinguir asistencia de autonomía.

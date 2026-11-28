@@ -179,3 +179,7 @@ Registrar:
 - Siguiente paso.
 
 No marcar trabajo como completado antes de su integración y verificación.
+
+## 2026-11-27 — SLOT-009 y cierre técnico Sprint 0
+SLOT-009 integrado en PR #16 (`f33aa63`); clonación local independiente, PostgreSQL aislado healthy, SDK 10.0.404, Node 24.14.0, npm ci, lint/build y backend Release 2/2 pruebas. API /health, /api/v1 y OpenAPI verificados; Next.js eligió 3007 por conflicto de puerto. La captura no identifica URL. npm audit y --omit=dev: 4 hallazgos moderados en cadena shadcn → ts-morph → @ts-morph/common → minimatch (GHSA-g3hv-75wg-m249); remediación pendiente antes de exposición pública. HTTPS y protección de ramas pendientes. No se verificó CI específico de PR #16 ni instalación en otra máquina.
+Compose rechazó contraseña vacía y luego creó volumen independiente; teardown conservó ambos volúmenes. Se corrigió plantilla 5080 → 5140 sin alterar evidencia histórica. Retrospectiva: evitar repetición y bloqueos de estilo, asistencia IA proporcional, autonomía de ejecución y validación basada en evidencia. Reporte: [SLOT-009](learning/2026-11-27-SLOT-009.html).

@@ -49,3 +49,7 @@ No inventar usuarios consultados, aprobaciones de terceros ni resultados de prue
 ## Evaluación y adaptación
 
 Aplicar `ASSESSMENT_PROTOCOL.md` y registrar el progreso individual en `PRACTITIONER_PROFILE.md`. Los niveles 1–4 anteriores se conservan; L0 significa sin evidencia suficiente, no incompetencia. Evaluar subcompetencias concretas, no inferir dominio de un área completa por una sola tarea. Incorporar diagnóstico de Sprint 0, observación continua, evaluaciones de cierre de módulo y transferencia diferida. El agente elige los ejercicios de refuerzo según evidencia, sin alterar unilateralmente prioridades de producto.
+
+## Cierre Sprint 0
+SLOT-009 integrado en PR #16 (`f33aa63`); clonación local independiente, PostgreSQL aislado healthy, SDK 10.0.404, Node 24.14.0, npm ci, lint/build y backend Release 2/2 pruebas. API /health, /api/v1 y OpenAPI verificados; Next.js eligió 3007 por conflicto de puerto. La captura no identifica URL. npm audit y --omit=dev: 4 hallazgos moderados en cadena shadcn → ts-morph → @ts-morph/common → minimatch (GHSA-g3hv-75wg-m249); remediación pendiente antes de exposición pública. HTTPS y protección de ramas pendientes. No se verificó CI específico de PR #16 ni instalación en otra máquina.
+Pendiente: diagnóstico distribuido y refinamiento de HU-001; priorizar revisión de dependencias antes de staging.
